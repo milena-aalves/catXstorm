@@ -17,19 +17,19 @@ tamanho = (800,600)
 tela = pygame.display.set_mode( tamanho ) 
 pygame.display.set_caption("Iron Man do Marcão")
 pygame.display.set_icon(icone)
-missileSound = pygame.mixer.Sound("recursos/missile.wav")
-explosaoSound = pygame.mixer.Sound("recursos/explosao.wav")
+gota_raio_Sound = pygame.mixer.Sound("recursos/gota_raio.mp3")
+dead_Sound = pygame.mixer.Sound("recursos/musicaDead.mp3")
 fonte = pygame.font.SysFont("comicsans",28)
 fonteStart = pygame.font.SysFont("comicsans",55)
 fonteMorte = pygame.font.SysFont("arial",120)
-pygame.mixer.music.load("recursos/ironsound.mp3")
+pygame.mixer.music.load("recursos/stormsound.mp3")
 
 branco = (255,255,255)
 preto = (0, 0 ,0 )
 
 
 def jogar(nome):
-    pygame.mixer.Sound.play(missileSound)
+    pygame.mixer.Sound.play(gota_raio_Sound)
     pygame.mixer.music.play(-1)
     posicaoXPersona = 400
     posicaoYPersona = 300
@@ -91,7 +91,7 @@ def jogar(nome):
             pontos = pontos + 1
             velocidadeMissel = velocidadeMissel + 1
             posicaoXMissel = random.randint(0,800)
-            pygame.mixer.Sound.play(missileSound)
+            pygame.mixer.Sound.play(gota_raio_Sound)
             
             
         tela.blit( missel, (posicaoXMissel, posicaoYMissel) )
@@ -117,7 +117,7 @@ def jogar(nome):
 
 def dead(nome, pontos):
     pygame.mixer.music.stop()
-    pygame.mixer.Sound.play(explosaoSound)
+    pygame.mixer.Sound.play(dead_Sound)
     
     jogadas  = {}
     try:
