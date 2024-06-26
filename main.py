@@ -39,10 +39,10 @@ def jogar(nome):
     posicaoYMissel = -240
     velocidadeMissel = 1
     pontos = 0
-    larguraPersona = 250
-    alturaPersona = 127
-    larguaMissel  = 50
-    alturaMissel  = 250
+    larguraPersona = 145
+    alturaPersona = 200
+    larguaMissel  = 105
+    alturaMissel  = 155
     dificuldade  = 20
 
     while True:
@@ -57,14 +57,7 @@ def jogar(nome):
                 movimentoXPersona = 0
             elif evento.type == pygame.KEYUP and evento.key == pygame.K_LEFT:
                 movimentoXPersona = 0
-            elif evento.type == pygame.KEYDOWN and evento.key == pygame.K_UP:
-                movimentoYPersona = -10
-            elif evento.type == pygame.KEYDOWN and evento.key == pygame.K_DOWN:
-                movimentoYPersona = 10
-            elif evento.type == pygame.KEYUP and evento.key == pygame.K_UP:
-                movimentoYPersona = 0
-            elif evento.type == pygame.KEYUP and evento.key == pygame.K_DOWN:
-                movimentoYPersona = 0
+            
                 
         posicaoXPersona = posicaoXPersona + movimentoXPersona            
         posicaoYPersona = posicaoYPersona + movimentoYPersona            
@@ -146,9 +139,9 @@ def dead(nome, pontos):
         tela.fill(branco)
         tela.blit(fundoDead, (0,0))
         buttonStart = pygame.draw.rect(tela, preto, (35,482,750,100),0)
-        textoStart = fonteStart.render("RESTART", True, branco)
+        textoStart = fonteStart.render("você se molhou!", True, branco)
         tela.blit(textoStart, (400,482))
-        textoEnter = fonte.render("Press enter to continue...", True, branco)
+        textoEnter = fonte.render("Quer continuar?", True, branco)
         tela.blit(textoEnter, (60,482))
         pygame.display.update()
         relogio.tick(60)
