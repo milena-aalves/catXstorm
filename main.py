@@ -12,7 +12,7 @@ fundo = pygame.image.load("recursos/fundo.png")
 fundoStart = pygame.image.load("recursos/fundoStart.png")
 fundoDead = pygame.image.load("recursos/fundoDead.png")
 
-missel = pygame.image.load("recursos/gota.png")
+missel = pygame.image.load("recursos/gota2.png")
 tamanho = (800,600)
 tela = pygame.display.set_mode( tamanho ) 
 pygame.display.set_caption("joguinho do gatinho!")
@@ -23,9 +23,12 @@ fonte = pygame.font.SysFont("comicsans",28)
 fonteStart = pygame.font.SysFont("comicsans",55)
 fonteMorte = pygame.font.SysFont("arial",120)
 pygame.mixer.music.load("recursos/stormsound.mp3")
-
+amarelo = (255,255,0)
 branco = (255,255,255)
 preto = (0, 0 ,0 )
+
+
+
 
 
 def jogar(nome):
@@ -39,12 +42,19 @@ def jogar(nome):
     posicaoYMissel = -240
     velocidadeMissel = 1
     pontos = 0
-    larguraPersona = 145
+    larguraPersona = 146
     alturaPersona = 256
-    larguaMissel  = 105
-    alturaMissel  = 155
+    larguaMissel  = 40
+    alturaMissel  = 58
+    larguraBola = 40
+    alturaBola = 205
     dificuldade  = 20
 
+    raio = 50
+    pulse = 1
+    maximo_raio = 60
+    minimo_raio = 40
+    
     while True:
         for evento in pygame.event.get():
             if evento.type == pygame.QUIT:
@@ -64,8 +74,8 @@ def jogar(nome):
         
         if posicaoXPersona < 0 :
             posicaoXPersona = 10
-        elif posicaoXPersona >550:
-            posicaoXPersona = 540
+        elif posicaoXPersona >750:
+            posicaoXPersona = 740
             
         if posicaoYPersona < 0 :
             posicaoYPersona = 10
@@ -75,7 +85,10 @@ def jogar(nome):
             
         tela.fill(branco)
         tela.blit(fundo, (0,0) )
-        #pygame.draw.circle(tela, preto, (posicaoXPersona,posicaoYPersona), 40, 0 )
+        raio += pulse
+        if raio >= maximo_raio or raio <= minimo_raio:
+            pulse = -pulse
+        pygame.draw.circle(tela, amarelo, (750, 50), raio)
         tela.blit( iron, (posicaoXPersona, posicaoYPersona) )
         
         posicaoYMissel = posicaoYMissel + velocidadeMissel
@@ -85,7 +98,6 @@ def jogar(nome):
             velocidadeMissel = velocidadeMissel + 1
             posicaoXMissel = random.randint(0,800)
             pygame.mixer.Sound.play(gota_raio_Sound)
-            
             
         tela.blit( missel, (posicaoXMissel, posicaoYMissel) )
         
