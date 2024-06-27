@@ -41,8 +41,8 @@ def jogar(nome):
     movimentoYPersona  = 0
     posicaoXMissel = 400
     posicaoYMissel = -240
-    posicaoXraio = 200
-    posicaoYraio = -240
+    posicaoXraio = 400
+    posicaoYraio = -140
     velocidadeMissel = 1
     velocidadeRaio = 1
     pontos = 0
