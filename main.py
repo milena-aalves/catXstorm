@@ -99,7 +99,14 @@ def jogar(nome):
             posicaoXMissel = random.randint(0,800)
             pygame.mixer.Sound.play(gota_raio_Sound)
             
-        tela.blit( missel, (posicaoXMissel, posicaoYMissel) )
+        posicaoYraio = posicaoYraio + velocidadeRaio
+        if posicaoYraio > 600:
+            posicaoYraio = -240
+            pontos = pontos + 1
+            velocidadeRaio = velocidadeMissel + 1
+            posicaoXraio = random.randint(0,800)
+            pygame.mixer.Sound.play(gota_raio_Sound)
+        tela.blit( missel, (posicaoXraio, posicaoYraio) )
         
         texto = fonte.render(nome+"- Pontos: "+str(pontos), True, branco)
         tela.blit(texto, (10,10))
@@ -107,12 +114,19 @@ def jogar(nome):
         pixelsPersonaX = list(range(posicaoXPersona, posicaoXPersona+larguraPersona))
         pixelsPersonaY = list(range(posicaoYPersona, posicaoYPersona+alturaPersona))
         pixelsMisselX = list(range(posicaoXMissel, posicaoXMissel + larguaMissel))
-        pixelsMisselY = list(range(posicaoYMissel, posicaoYMissel + alturaMissel))
+        pixelsMisselY = list(range(posicaoYMissel, posicaoYMissel + alturaMissel)) 
+
+        '''pixelsMisselX = list(range(posicaoXMissel, posicaoXMissel + larguaMissel))
+        pixelsMisselY = list(range(posicaoYMissel, posicaoYMissel + alturaMissel))'''
         
         #print( len( list( set(pixelsMisselX).intersection(set(pixelsPersonaX))   ) )   )
         if  len( list( set(pixelsMisselY).intersection(set(pixelsPersonaY))) ) > dificuldade:
             if len( list( set(pixelsMisselX).intersection(set(pixelsPersonaX))   ) )  > dificuldade:
-                dead(nome, pontos)
+                dead(nome, pontos) 
+        
+        '''if  len( list( set(pixelsMisselY).intersection(set(pixelsPersonaY))) ) > dificuldade:
+            if len( list( set(pixelsMisselX).intersection(set(pixelsPersonaX))   ) )  > dificuldade:
+                dead(nome, pontos)'''
         
     
         
