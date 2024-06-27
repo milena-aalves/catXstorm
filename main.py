@@ -13,6 +13,7 @@ fundoStart = pygame.image.load("recursos/fundoStart.png")
 fundoDead = pygame.image.load("recursos/fundoDead.png")
 
 missel = pygame.image.load("recursos/gota2.png")
+raios = pygame.image.load("recursos/raio.png")
 tamanho = (800,600)
 tela = pygame.display.set_mode( tamanho ) 
 pygame.display.set_caption("joguinho do gatinho!")
@@ -40,14 +41,17 @@ def jogar(nome):
     movimentoYPersona  = 0
     posicaoXMissel = 400
     posicaoYMissel = -240
+    posicaoXraio = 200
+    posicaoYraio = -240
     velocidadeMissel = 1
+    velocidadeRaio = 1
     pontos = 0
     larguraPersona = 146
     alturaPersona = 256
     larguaMissel  = 40
     alturaMissel  = 58
-    larguraBola = 40
-    alturaBola = 205
+    larguaraio  = 80
+    alturaraio  = 80
     dificuldade  = 20
 
     raio = 50
@@ -98,15 +102,16 @@ def jogar(nome):
             velocidadeMissel = velocidadeMissel + 1
             posicaoXMissel = random.randint(0,800)
             pygame.mixer.Sound.play(gota_raio_Sound)
+        tela.blit( missel, (posicaoXraio, posicaoYraio) )
             
         posicaoYraio = posicaoYraio + velocidadeRaio
         if posicaoYraio > 600:
             posicaoYraio = -240
             pontos = pontos + 1
-            velocidadeRaio = velocidadeMissel + 1
+            velocidadeRaio = velocidadeRaio + 1
             posicaoXraio = random.randint(0,800)
             pygame.mixer.Sound.play(gota_raio_Sound)
-        tela.blit( missel, (posicaoXraio, posicaoYraio) )
+        tela.blit( raios, (posicaoXraio, posicaoYraio) )
         
         texto = fonte.render(nome+"- Pontos: "+str(pontos), True, branco)
         tela.blit(texto, (10,10))
@@ -115,18 +120,17 @@ def jogar(nome):
         pixelsPersonaY = list(range(posicaoYPersona, posicaoYPersona+alturaPersona))
         pixelsMisselX = list(range(posicaoXMissel, posicaoXMissel + larguaMissel))
         pixelsMisselY = list(range(posicaoYMissel, posicaoYMissel + alturaMissel)) 
-
-        '''pixelsMisselX = list(range(posicaoXMissel, posicaoXMissel + larguaMissel))
-        pixelsMisselY = list(range(posicaoYMissel, posicaoYMissel + alturaMissel))'''
+        pixelsraioX = list(range(posicaoXraio, posicaoXraio + larguaraio))
+        pixelsraioY = list(range(posicaoYraio, posicaoYraio + alturaraio))
         
         #print( len( list( set(pixelsMisselX).intersection(set(pixelsPersonaX))   ) )   )
         if  len( list( set(pixelsMisselY).intersection(set(pixelsPersonaY))) ) > dificuldade:
             if len( list( set(pixelsMisselX).intersection(set(pixelsPersonaX))   ) )  > dificuldade:
                 dead(nome, pontos) 
         
-        '''if  len( list( set(pixelsMisselY).intersection(set(pixelsPersonaY))) ) > dificuldade:
-            if len( list( set(pixelsMisselX).intersection(set(pixelsPersonaX))   ) )  > dificuldade:
-                dead(nome, pontos)'''
+        if  len( list( set(pixelsraioY).intersection(set(pixelsPersonaY))) ) > dificuldade:
+            if len( list( set(pixelsraioX).intersection(set(pixelsPersonaX))   ) )  > dificuldade:
+                dead(nome, pontos)
         
     
         
